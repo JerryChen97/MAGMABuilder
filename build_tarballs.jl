@@ -39,7 +39,7 @@ platforms = expand_gcc_versions(platforms)
 
 # The products that we will ensure are always built
 products(prefix) = [
-    LibraryProduct(prefix, "libMAGMA", :libMAGMA),
+    LibraryProduct(prefix, "libmagma", :libmagma),
 ]
 
 # Dependencies that must be installed before this package can be built
