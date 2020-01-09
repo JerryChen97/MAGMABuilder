@@ -12,20 +12,10 @@ sources = [
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir/MAGMA
-# We need a newer version of FindCUDA.cmake
-curl -L 'https://raw.githubusercontent.com/Kitware/CMake/v3.13.0/Modules/FindCUDA.cmake' -o /usr/share/cmake/Modules/FindCUDA.cmake
-# Apply patches to force name-mangling
-atomic_patch -p1 ${WORKSPACE}/srcdir/patches/fortran_mangling.patch
-mkdir build && cd build
-export CFLAGS="${CFLAGS} -DMAGMA_ILP64"
-cmake .. -DCMAKE_TOOLCHAIN_FILE=/opt/${target}/${target}.toolchain \
-    -DLAPACK_LIBRARIES="-lopenblas64_ -lgfortran -lquadmath" \
-    -DCUDA_TOOLKIT_ROOT_DIR="${prefix}" \
-    -DCUDA_TOOLKIT_TARGET_DIR="${prefix}" \
-    -DGPU_TARGET="Maxwell Pascal Volta" \
-    -DCUDA_TOOLKIT_ROOT_DIR_INTERNAL="${prefix}"
-make -j${nproc}
-make install
+export CUDADIR="${prefix}"
+export OPENBLASDIR="${prefix}"
+make lib -j${nproc}
+make install -j${nproc}
 """
 
 # These are the platforms we will build for by default, unless further
