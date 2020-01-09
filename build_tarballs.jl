@@ -22,8 +22,8 @@ make install -j${nproc}
 # platforms are passed in on the command line
 platforms = [
     Linux(:x86_64),
-    Windows(:x86_64),
-    MacOS(:x86_64),
+#     Windows(:x86_64),
+#     MacOS(:x86_64),
 ]
 platforms = expand_gcc_versions(platforms)
 
