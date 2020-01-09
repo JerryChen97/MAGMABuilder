@@ -2,16 +2,16 @@ using BinaryBuilder
 
 # Collection of sources required to build Nettle
 name = "MAGMA"
-version = v"2.5.1"
+version = v"2.5.2"
 sources = [
-    "http://icl.utk.edu/projectsfiles/magma/downloads/magma-2.5.1.tar.gz" =>
-    "ce32c199131515336b30c92a907effe0c441ebc5c5bdb255e4b06b2508de109f",
-    "./bundled",
+    "https://github.com/Roger-luo/MAGMA/archive/v2.5.2.tar.gz" =>
+#    "ce32c199131515336b30c92a907effe0c441ebc5c5bdb255e4b06b2508de109f", #the sha256 need to be found
+#    "./bundled",
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
-cd $WORKSPACE/srcdir/magma-*/
+cd $WORKSPACE/srcdir/MAGMA
 # We need a newer version of FindCUDA.cmake
 curl -L 'https://raw.githubusercontent.com/Kitware/CMake/v3.13.0/Modules/FindCUDA.cmake' -o /usr/share/cmake/Modules/FindCUDA.cmake
 # Apply patches to force name-mangling
