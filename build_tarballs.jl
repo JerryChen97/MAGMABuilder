@@ -14,7 +14,7 @@ sources = [
 script = raw"""
 cd $WORKSPACE/srcdir
 cd MAGMA-2.5.2/
-export CUDADIR="${prefix}"
+export CUDADIR="${prefix}/cuda"
 export OPENBLASDIR="${prefix}"
 make lib -j${nproc}
 make install -j${nproc}
