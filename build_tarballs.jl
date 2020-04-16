@@ -12,10 +12,10 @@ sources = [
 
 # Bash recipe for building across all platforms
 script = raw"""
-cd $WORKSPACE/srcdir
-cd MAGMA-2.5.2/
 export CUDADIR="${prefix}/cuda"
 export OPENBLASDIR="${prefix}"
+export PATH=${PATH}:${WORKSPACE}/destdir/cuda/bin
+cd ${WORKSPACE}/srcdir/MAGMA-2.5.2/
 make lib -j${nproc}
 make install -j${nproc}
 exit
@@ -35,9 +35,9 @@ products = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    Dependency(PackageSpec(name="OpenBLAS_jll", uuid="4536629a-c528-5b80-bd46-f80d51c5b363"))
     Dependency(PackageSpec(name="CUDA_full_jll", uuid="4f82f1eb-248c-5f56-a42e-99106d144614"))
+    Dependency(PackageSpec(name="OpenBLAS_jll", uuid="4536629a-c528-5b80-bd46-f80d51c5b363"))
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; preferred_gcc_version = v"7.1.0", preferred_llvm_version = v"7.1.0")
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; preferred_gcc_version = v"7.1.0")
